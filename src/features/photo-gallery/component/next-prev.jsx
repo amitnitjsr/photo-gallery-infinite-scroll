@@ -41,8 +41,7 @@ const NextPrev = (props) => {
             >
                 <Fade in={props.open}>
                     <div className={classes.paper}>
-                        <h2 id="transition-modal-title">Transition modal</h2>
-                        <p id="transition-modal-description">react-transition-group animates me.</p>
+                        <img src={props.imageData} alt="no_image" />
                     </div>
                 </Fade>
             </Modal>

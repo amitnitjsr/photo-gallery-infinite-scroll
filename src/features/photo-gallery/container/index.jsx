@@ -13,7 +13,8 @@ export default class index extends Component {
             per_page: 10,
             hasMore: true,
             open: false,
-            imageData: ''
+            imageData: '',
+            imageIndex: 0
         }
     }
 
@@ -48,8 +49,10 @@ export default class index extends Component {
         this.setState({ open: !this.state.open });
     }
 
-    clickOnPhotoHandler = (id) => {
-        this.openCloseModalhandler();
+    clickOnPhotoHandler = (image, index) => {
+        this.setState({ imageData: image, imageIndex: index }, () => {
+            this.openCloseModalhandler();
+        });
     }
 
     nextHandler = () => {
@@ -86,6 +89,7 @@ export default class index extends Component {
                     clickOnNext={this.nextHandler}
                     clickOnPrev={this.state.prevHandler}
                     imageData={this.state.imageData}
+                    key={this.state.imageData}
                 />
             </div>
         )
