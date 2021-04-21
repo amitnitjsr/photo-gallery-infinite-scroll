@@ -13,9 +13,9 @@ const GalleryComponent = (props) => {
     return (
         <div className="main-div">
             {list && list.length > 0 && (
-                list.map((val) => {
+                list.map((val, index) => {
                     return (
-                        <div className="child-div">
+                        <div className="child-div" key={index} onClick={() => props.clickOnPhoto(val)}>
                             <img src={val.urls.small} alt="no_image" />
                         </div>
                     )

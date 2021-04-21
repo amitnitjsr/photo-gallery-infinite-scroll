@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import GalleryComponent from '../component/gallery-component';
 import InfiniteScroll from "react-infinite-scroll-component";
+import NextPrevComponent from '../component/next-prev';
 import Axios from 'axios';
 
 export default class index extends Component {
@@ -11,6 +12,7 @@ export default class index extends Component {
             page: 1,
             per_page: 10,
             hasMore: true,
+            open: false
         }
     }
 
@@ -41,6 +43,14 @@ export default class index extends Component {
         }
     }
 
+    openCloseModalhandler = () => {
+        this.setState({ open: !this.state.open });
+    }
+
+    clickOnPhotoHandler = (id) => {
+        this.openCloseModalhandler();
+    }
+
     render() {
         return (
             <div>
@@ -58,8 +68,13 @@ export default class index extends Component {
                     <GalleryComponent
                         list={this.state.allPhotoList}
                         key={this.state.allPhotoList}
+                        clickOnPhoto={this.clickOnPhotoHandler}
                     />
                 </InfiniteScroll>
+                <NextPrevComponent
+                    open={this.state.open}
+                    close={this.openCloseModalhandler}
+                />
             </div>
         )
     }
