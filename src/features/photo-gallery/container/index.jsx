@@ -12,7 +12,8 @@ export default class index extends Component {
             page: 1,
             per_page: 10,
             hasMore: true,
-            open: false
+            open: false,
+            imageData: ''
         }
     }
 
@@ -51,6 +52,14 @@ export default class index extends Component {
         this.openCloseModalhandler();
     }
 
+    nextHandler = () => {
+
+    }
+
+    prevHandler = () => {
+
+    }
+
     render() {
         return (
             <div>
@@ -74,6 +83,9 @@ export default class index extends Component {
                 <NextPrevComponent
                     open={this.state.open}
                     close={this.openCloseModalhandler}
+                    clickOnNext={this.nextHandler}
+                    clickOnPrev={this.state.prevHandler}
+                    imageData={this.state.imageData}
                 />
             </div>
         )
