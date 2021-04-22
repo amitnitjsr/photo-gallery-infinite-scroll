@@ -41,8 +41,19 @@ const NextPrev = (props) => {
                 }}
             >
                 <Fade in={props.open}>
-                    <div className={classes.paper}>
-                        <img src={props.imageData} alt="no_image" />
+
+                    <div className={classes.paper} style={{ display: 'flex', }}>
+                        <div >
+                            <i className={`zmdi zmdi-arrow-left zmdi-hc-2x ${props.prevDisable ? 'arrow-disable' : 'arrow'}`}
+                                onClick={() => props.prevHandler()}
+                            />
+                        </div>
+                        <img src={props.imageData} alt="no_image" style={{ height: '300px', width: '250px' }} />
+                        <div>
+                            <i className={`zmdi zmdi-arrow-right zmdi-hc-2x ${props.nextDisable ? 'arrow-disable' : 'arrow'}`}
+                                onClick={() => props.nextHandler()}
+                            />
+                        </div>
                     </div>
                 </Fade>
             </Modal>

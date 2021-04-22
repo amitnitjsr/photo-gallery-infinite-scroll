@@ -14,7 +14,9 @@ export default class index extends Component {
             hasMore: true,
             open: false,
             imageData: '',
-            imageIndex: 0
+            imageIndex: 0,
+            prevDisable: false,
+            nextDisable: false
         }
     }
 
@@ -56,10 +58,37 @@ export default class index extends Component {
     }
 
     nextHandler = () => {
-
+        let len = this.state.allPhotoList.length - 1;
+        if (len !== this.state.imageIndex) {
+            this.setState({ imageIndex: this.state.imageIndex + 1 }, () => {
+                if (this.state.imageIndex < len) {
+                    let image = this.state.allPhotoList.filter((val, index) => index === this.state.imageIndex);
+                    if (image && image.length > 0) {
+                        this.setState({ imageData: image[0].urls.small, nextDisable: false, prevDisable: false });
+                    }
+                }
+            });
+        }
+        else {
+            this.setState({ nextDisable: true, prevDisable: false });
+        }
     }
 
     prevHandler = () => {
+        let len = this.state.allPhotoList.length - 1;
+        if (this.state.imageIndex !== 0) {
+            this.setState({ imageIndex: this.state.imageIndex - 1 }, () => {
+                if (this.state.imageIndex < len) {
+                    let image = this.state.allPhotoList.filter((val, index) => index === this.state.imageIndex);
+                    if (image && image.length > 0) {
+                        this.setState({ imageData: image[0].urls.small, prevDisable: false, nextDisable: false });
+                    }
+                }
+            });
+        }
+        else {
+            this.setState({ prevDisable: true, nextDisable: false });
+        }
 
     }
 
@@ -79,17 +108,17 @@ export default class index extends Component {
                 >
                     <GalleryComponent
                         list={this.state.allPhotoList}
-                        key={this.state.allPhotoList}
                         clickOnPhoto={this.clickOnPhotoHandler}
                     />
                 </InfiniteScroll>
                 <NextPrevComponent
                     open={this.state.open}
                     close={this.openCloseModalhandler}
-                    clickOnNext={this.nextHandler}
-                    clickOnPrev={this.state.prevHandler}
+                    nextHandler={this.nextHandler}
+                    prevHandler={this.prevHandler}
                     imageData={this.state.imageData}
-                    key={this.state.imageData}
+                    prevDisable={this.state.prevDisable}
+                    nextDisable={this.state.nextDisable}
                 />
             </div>
         )
