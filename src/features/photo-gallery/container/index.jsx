@@ -3,6 +3,7 @@ import GalleryComponent from '../component/gallery-component';
 import InfiniteScroll from "react-infinite-scroll-component";
 import NextPrevComponent from '../component/next-prev';
 import Axios from 'axios';
+import ErrorComponent from '../component/errorComponent';
 
 export default class index extends Component {
     constructor(props) {
@@ -16,7 +17,8 @@ export default class index extends Component {
             imageData: '',
             imageIndex: 0,
             prevDisable: false,
-            nextDisable: false
+            nextDisable: false,
+            apiError: false,
         }
     }
 
@@ -28,10 +30,11 @@ export default class index extends Component {
         Axios.get('https://api.unsplash.com/photos?page=' + this.state.page + '&per_page=' + this.state.per_page + '&client_id=P0aLUupBEEYeB6HiA7FCk33t3uhkIm9fbHxhFHzd7Tw'
         )
             .then((res) => {
-                this.setState({ allPhotoList: res && res.data });
+                this.setState({ allPhotoList: res && res.data, apiError: false });
             })
             .catch((error) => {
-                console.log(error)
+                console.log('error', error)
+                this.setState({ apiError: true })
             })
     }
 
@@ -95,6 +98,10 @@ export default class index extends Component {
     render() {
         return (
             <div>
+                {this.state.apiError ? (
+                    <ErrorComponent />
+                )
+                    : ''}
                 <InfiniteScroll
                     dataLength={this.state.per_page}
                     next={() => this.fetchMoreData('pending')}

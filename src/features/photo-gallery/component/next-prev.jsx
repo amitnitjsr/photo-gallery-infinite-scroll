@@ -50,7 +50,7 @@ const NextPrev = (props) => {
                                 onClick={() => props.prevHandler()}
                             />
                         </div>
-                        <img src={props.imageData} alt="no_image" style={{ height: '300px', width: '250px' }} />
+                        <img src={props.imageData} alt="no_image" className="sub-image" />
                         <div>
                             <i className={`zmdi zmdi-arrow-right zmdi-hc-2x ${props.nextDisable ? 'arrow-disable' : 'arrow'}`}
                                 onClick={() => props.nextHandler()}
