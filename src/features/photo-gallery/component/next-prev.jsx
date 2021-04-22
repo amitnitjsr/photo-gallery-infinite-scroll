@@ -16,6 +16,8 @@ const useStyles = makeStyles((theme) => ({
         border: '2px solid #000',
         boxShadow: theme.shadows[5],
         padding: theme.spacing(2, 4, 3),
+        display: 'flex',
+        alignItems: 'center'
     },
 }));
 
@@ -42,7 +44,7 @@ const NextPrev = (props) => {
             >
                 <Fade in={props.open}>
 
-                    <div className={classes.paper} style={{ display: 'flex', }}>
+                    <div className={classes.paper} >
                         <div >
                             <i className={`zmdi zmdi-arrow-left zmdi-hc-2x ${props.prevDisable ? 'arrow-disable' : 'arrow'}`}
                                 onClick={() => props.prevHandler()}
